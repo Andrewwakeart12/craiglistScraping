@@ -16,7 +16,11 @@ const scraperObject = {
 		let newPage = await browser.newPage();
 		await newPage.waitForTimeout(5000);
 		await newPage.goto(link);
-		dataObj['gigTitle'] = await newPage.$eval('ul >.result-row > .result-info > h3', link => link.querySelector('a').href);
+		dataObj['gigTitle'] = await newPage.$$eval('ul >.result-row > .result-info > h3', link => {
+			link = link.map(el => el.querySelector('a').href);
+			
+			return link;
+		})
 
 		
 	await		resolve(dataObj);
