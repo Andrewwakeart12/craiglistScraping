@@ -14,13 +14,15 @@ const scraperObject = {
 		let pagePromise = (link)=> new Promise(async(resolve,reject) =>{
 		let dataObj = {};
 		let newPage = await browser.newPage();
+		await newPage.waitForTimeout(5000);
 		await newPage.goto(link);
-		dataObj['gigTitle'] = await newPage.$eval('ul >.result-row > .result-info > h3 >  a', text => text.content);
+		dataObj['gigTitle'] = await newPage.$eval('ul >.result-row > .result-info > h3', link => link.querySelector('a').href);
 
-			resolve(dataObj);
+		
+	await		resolve(dataObj);
 			await newPage.close();
 		});
-		for (link in urls){
+		for (link in urls){ 
 		let currentPageData = await pagePromise(urls[link]);
 			console.log(currentPageData);
 		}
