@@ -20,10 +20,10 @@ const scraperObject = {
 			link = link.map(el => el.querySelector('a').href);
 			
 			return link;
-		})
+		});
+		dataObj['gigTime']= await newPage.$eval('ul >.result-row > .result-info .result-date', text => text.textContent); 
 
-		
-	await		resolve(dataObj);
+			await resolve(dataObj);
 			await newPage.close();
 		});
 		for (link in urls){ 

@@ -1,0 +1,7 @@
+ul.rows
+  li.result-row
+    a | div.result-info
+    |	 |
+    |    ----> span.icon.icon-star | time.result-date |h3.result-h    |           eading | span.result-meta
+    |
+    ---->empty!
