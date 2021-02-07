@@ -21,7 +21,11 @@ const scraperObject = {
 			
 			return link;
 		});
-		dataObj['gigTime']= await newPage.$eval('ul >.result-row > .result-info .result-date', text => text.textContent); 
+		dataObj['gigTime']= await newPage.$$eval('ul >.result-row > .result-info .result-date', text => {
+
+			text=text.map(el => el.textContent);
+			return text;
+		}); 
 
 			await resolve(dataObj);
 			await newPage.close();
