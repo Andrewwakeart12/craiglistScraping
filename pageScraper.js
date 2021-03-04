@@ -3,7 +3,7 @@ const scraperObject = {
 	async scraper(browser){
 		let page= await browser.newPage();
 		console.log(this.url);
-		await page.goto(this.url); 
+		await page.goto(this.url,{waitUntil : 'networkidle2' }).catch(e => void 0); 
 
 		await page.waitForSelector('.geo-site-list');
 		let urls = await page.$$eval('section  ul > li' , links => {
@@ -14,8 +14,7 @@ const scraperObject = {
 		let pagePromise = (link)=> new Promise(async(resolve,reject) =>{
 		let dataObj = {};
 		let newPage = await browser.newPage();
-		await newPage.waitForTimeout(5000);
-		await newPage.goto(link);
+		await newPage.goto(link,{waitUntil : 'networkidle2' }).catch(e => void 0);
 		dataObj['gigTitle'] = await newPage.$$eval('ul >.result-row > .result-info > h3', link => {
 			link = link.map(el => el.querySelector('a').href);
 			
