@@ -1,3 +1,4 @@
+
 const scraperObject = {
 	url: 'https://geo.craigslist.org/iso/us',
 	async scraper(browser){
@@ -14,7 +15,9 @@ const scraperObject = {
 		let pagePromise = (link)=> new Promise(async(resolve,reject) =>{
 		let dataObj = {};
 		let newPage = await browser.newPage();
+
 		await newPage.goto(link,{waitUntil : 'networkidle2' }).catch(e => void 0);
+
 		dataObj['gigTitle'] = await newPage.$$eval('ul >.result-row > .result-info > h3', link => {
 			link = link.map(el => el.querySelector('a').href);
 			
@@ -31,7 +34,14 @@ const scraperObject = {
 		});
 		for (link in urls){ 
 		let currentPageData = await pagePromise(urls[link]);
-			console.log(currentPageData);
+			saveInformation(currentPageData);
 		}
-	}}
+	},
+	data:[]
+}
+var i = 0;
+function saveInformation(data){
+	scraperObject.data.push(data);
+}
+	
 module.exports = scraperObject;
