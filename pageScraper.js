@@ -1,17 +1,17 @@
-
+const cliProgress = require('cli-progress');
 const scraperObject = {
 	url: 'https://geo.craigslist.org/iso/us',
 	async scraper(browser){
 		let page= await browser.newPage();
 		console.log(this.url);
 		await page.goto(this.url,{waitUntil : 'networkidle2' }).catch(e => void 0); 
-
+		//select every link in the geo site page, so we can add the search/cpg?is_paid=yes(this work for looking for paid jobsS)
 		await page.waitForSelector('.geo-site-list');
 		let urls = await page.$$eval('section  ul > li' , links => {
 			links = links.map ( el => el.querySelector('a').href + 'search/cpg?is_paid=yes')
 			return links;
 		});
-
+		//this is a function that get a link parrameter so we can process it
 		let pagePromise = (link)=> new Promise(async(resolve,reject) =>{
 		let dataObj = {};
 		let newPage = await browser.newPage();
@@ -32,9 +32,15 @@ const scraperObject = {
 			await resolve(dataObj);
 			await newPage.close();
 		});
-		for (link in urls){ 
+		//here is where we use the pagePromis function in a for cycle so we can get the information one at a time
+		
+		const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+		bar1.start(urls.length, 0);
+		var count = 0;
+		for (link in urls){
+		bar1.update(count++); 
 		let currentPageData = await pagePromise(urls[link]);
-			saveInformation(currentPageData);
+		saveInformation(currentPageData);
 		}
 	},
 	data:[]
