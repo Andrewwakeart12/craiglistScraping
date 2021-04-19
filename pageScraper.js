@@ -1,6 +1,6 @@
 const cliProgress = require('cli-progress');
 const scraperObject = {
-	url: 'https://geo.craigslist.org/iso/us',
+	url:null,
 	async scraper(browser){
 		let page= await browser.newPage();
 		console.log(this.url);
@@ -41,9 +41,9 @@ const scraperObject = {
 		for (link in urls){
 		bar1.update(count++); 
 		let currentPageData = await pagePromise(urls[link]);
-		this.data.push(currentPageData);		}
+		this.data=currentPageData;		}
 	},
-	data:[]
+	data:null
 }
 	
 module.exports = scraperObject;
