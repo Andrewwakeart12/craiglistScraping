@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "cli-progress": "^3.9.0",
+    "express": "^4.17.1",
     "puppeteer": "^7.0.1"
   }
 }

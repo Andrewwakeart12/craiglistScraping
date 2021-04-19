@@ -7,8 +7,9 @@ const scraperObject = {
 		await page.goto(this.url,{waitUntil : 'networkidle2' }).catch(e => void 0); 
 		//select every link in the geo site page, so we can add the search/cpg?is_paid=yes(this work for looking for paid jobsS)
 		await page.waitForSelector('.geo-site-list');
+		
 		let urls = await page.$$eval('section  ul > li' , links => {
-			links = links.map ( el => el.querySelector('a').href + 'search/cpg?is_paid=yes')
+			links = links.map( el => el.querySelector('a').href + 'search/cpg?is_paid=yes');
 			return links;
 		});
 		//this is a function that get a link parrameter so we can process it
@@ -40,14 +41,9 @@ const scraperObject = {
 		for (link in urls){
 		bar1.update(count++); 
 		let currentPageData = await pagePromise(urls[link]);
-		saveInformation(currentPageData);
-		}
+		this.data.push(currentPageData);		}
 	},
 	data:[]
-}
-var i = 0;
-function saveInformation(data){
-	scraperObject.data.push(data);
 }
 	
 module.exports = scraperObject;

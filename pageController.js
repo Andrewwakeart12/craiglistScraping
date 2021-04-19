@@ -4,7 +4,6 @@ async function scrapeAll(browserInstance){
 	try{
 	browser= await browserInstance;
 	await pageScraper.scraper(browser);
-	console.log(pageScraper.scraperObject.data);
 
 	}catch(err){
 	console.log(err);
