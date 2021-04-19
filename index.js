@@ -31,10 +31,17 @@ app.use(body_parser.urlencoded({extended:true}));
 
 
 app.get('/',(req,res)=>{
-	
-	res.render('index');	
+	if(req.body=="123"){
+	res.render('index',req.body);	
+	}
+		res.render('index');
 })
-app.post('/obtenerinfo', (req,res)=>{
-	var obj=scrap();
+app.get('/random', (req,res)=>{
+	req.body="123"
+	res.redirect(req.body,'/');
+})
+app.post('/obtenerinfo',async (req,res)=>{
+	var obj= await scrap();
+	res.send(obj);
 })
 app.listen(3000);

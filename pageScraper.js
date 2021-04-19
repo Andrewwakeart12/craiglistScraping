@@ -37,7 +37,7 @@ const scraperObject = {
 		
 		const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 		bar1.start(urls.length, 0);
-		var count = 0;
+		var count = 1;
 		for (link in urls){
 		bar1.update(count++); 
 		let currentPageData = await pagePromise(urls[link]);
