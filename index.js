@@ -7,9 +7,9 @@ var hbs = require('express-hbs');
 var body_parser= require('body-parser');
 // Use `.hbs` for extensions and find partials in `views/partials`.
 
-async function  scrap(){
+async function  scrap(searchUrl){
 pageScraper.url = await 'https://geo.craigslist.org/iso/us';
-
+pageScraper.searchUrl=searchUrl;
 //Start the browser and create a browser instance
  let browserInstance = await browserObject.startBrowser();
 
@@ -31,17 +31,10 @@ app.use(body_parser.urlencoded({extended:true}));
 
 
 app.get('/',(req,res)=>{
-	if(req.body=="123"){
-	res.render('index',req.body);	
-	}
 		res.render('index');
 })
-app.get('/random', (req,res)=>{
-	req.body="123"
-	res.redirect(req.body,'/');
-})
 app.post('/obtenerinfo',async (req,res)=>{
-	var obj= await scrap();
-	res.send(obj);
+	var obj= await scrap(req.body.search);
+	res.render("index",obj);
 })
 app.listen(3000);

@@ -1,6 +1,7 @@
 const cliProgress = require('cli-progress');
 const scraperObject = {
 	url:null,
+	searchUrl:null,
 	async scraper(browser){
 		let page= await browser.newPage();
 		console.log(this.url);
@@ -9,7 +10,7 @@ const scraperObject = {
 		await page.waitForSelector('.geo-site-list');
 		
 		let urls = await page.$$eval('section  ul > li' , links => {
-			links = links.map( el => el.querySelector('a').href + 'search/cpg?is_paid=yes');
+			links = links.map( el => el.querySelector('a').href + 'search/cpg?query='+this.searchUrl+'&is_paid=yes');
 			return links;
 		});
 		//this is a function that get a link parrameter so we can process it
