@@ -6,7 +6,8 @@ let browser;
 	browser= await puppeteer.launch({
 		headless:true,
 		args: ["--disable-setuid-sandbox"],
-		'ignoreHTTPSErrors':true
+		'ignoreHTTPSErrors':true,
+		executablePath: 'C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe'
 		});
 	}catch (err){
 		console.log(err);

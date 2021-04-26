@@ -1,1 +1,1 @@
-{"scripts":{"dev":"nodemon index.js"},"dependencies":{"body-parser":"^1.19.0","cli-progress":"^3.9.0","express":"^4.17.1","express-hbs":"^2.3.5","mongoose":"^5.12.5","morgan":"^1.10.0","multer":"^1.4.2","nodemon":"^2.0.7","puppeteer":"^7.0.1"}}
+{"scripts":{"dev":"nodemon index.js"},"dependencies":{"body-parser":"^1.19.0","cli-progress":"^3.9.0","ejs":"^3.1.6","express":"^4.17.1","express-hbs":"^2.3.5","firefox":"^0.0.1","mongoose":"^5.12.5","morgan":"^1.10.0","multer":"^1.4.2","nodemon":"^2.0.7","puppeteer":"^7.0.1"}}

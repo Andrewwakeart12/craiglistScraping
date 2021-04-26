@@ -10,7 +10,7 @@ const scraperObject = {
 		await page.waitForSelector('.geo-site-list');
 		
 		let urls = await page.$$eval('section  ul > li' , links => {
-			links = links.map( el => el.querySelector('a').href + 'search/cpg?query='+this.searchUrl+'&is_paid=yes');
+			links = links.map( el => el.querySelector('a').href + 'search/cpg?is_paid=yes');
 			return links;
 		});
 		//this is a function that get a link parrameter so we can process it
@@ -33,6 +33,7 @@ const scraperObject = {
 
 			await resolve(dataObj);
 			await newPage.close();
+
 		});
 		//here is where we use the pagePromis function in a for cycle so we can get the information one at a time
 		
@@ -42,9 +43,11 @@ const scraperObject = {
 		for (link in urls){
 		bar1.update(count++); 
 		let currentPageData = await pagePromise(urls[link]);
-		this.data=currentPageData;		}
+		this.data.push(currentPageData);	
+			}
+			console.log(this.data['gigTitle']);
 	},
-	data:null
+	data:[]
 }
 	
 module.exports = scraperObject;
