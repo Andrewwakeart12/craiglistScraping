@@ -14,9 +14,12 @@
 	<input type="submit" name="submit" value="search for information">
 </form>
 <% if (obj) { %>
-		<% for(var i=0; i<obj.length; i++) {%>
-   				<li><%= obj[i]['gigTitle'] %></li>
-		<% } %>
+		<% for(var i=0; i< obj.length; i++) { var e=0; %>
+   			<% for(e=0; e < obj[i]['gigTitle'].length; e++) {%>	
+				<li><%= obj[i]['gigTitle'][e] %></li>
+			<% } %>
+	
+   		<% } %>
 <% } %>
 </body>
 </html>
